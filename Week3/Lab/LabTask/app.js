@@ -27,10 +27,12 @@ app.get("/item", function (req, res) {
 
     let item = {
         name: params.get("name"),
-        quality: params.get("quality"),
+        quantity: params.get("quantity"),
     };
 
-    res.send("The cost of " + item.name + " is " + (parseInt(item.quality)*parseInt(ranNum)) + " dollars");
+    console.log(parseInt(item.quantity), ranNum);
+
+    res.send("The cost of " + item.name + " is " + parseInt(item.quantity)*ranNum + " dollars");
     }
 );
 
