@@ -45,8 +45,9 @@ app.get("/33120102/sales", function (req, res) {
 
 app.get("/33120102/sales/unpaid", function (req, res) {
     db.collection("sales")
-        .find({ status: "unpaid" })
-        .toArray(function (err, data) {
+    //find a sale with isPaid false
+    .find({ isPaid: false })
+    .toArray(function (err, data) {
             //if data is not found, redirect to invalid page
             if (data.length === 0) {
                 res.sendFile(path.join(__dirname, "views", "noPaid.html"));
@@ -73,8 +74,8 @@ app.post("/33120102/sales/add", function (req, res) {
 });
 
 app.get("/33120102/sales/remove", function (req, res) {
-    let id = new mongodb.ObjectID(req.query.id);
-    db.collection("sales").deleteOne({ _id: id });
+    //delete entire sales document
+    db.collection("sales").deleteMany({});
     res.redirect("/33120102/sales");
 });
 

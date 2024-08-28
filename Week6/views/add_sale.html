@@ -2,14 +2,19 @@
 <!DOCTYPE html>
 
 <html>
-    <body>
-        <h1>Add a Sale</h1>
-        <form action="/33120102/sales/add" method="post">
-            <p>Name: <input type="text" name="name"></p>
-            <p>Price: <input type="text" name="price"></p>
-            <p>Quantity: <input type="text" name="price"></p>
-            <p>IsPaid: <input type="text" name="payment_status"></p>
-            <p><input type="submit" value="Submit"></p>
-        </form>
-    </body>
+
+<body>
+    <h1>Add a Sale</h1>
+    <form action="/33120102/sales/add" method="post">
+        <p>Name: <input type="text" name="name"></p>
+        <p>Price: <input type="text" name="price"></p>
+        <p>Quantity: <input type="text" name="quantity"></p>
+        <p>Is Paid: <select name="isPaid">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        <input type="submit" value="Submit">
+
+    </form>
+</body>
+
 </html>
