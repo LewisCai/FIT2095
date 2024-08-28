@@ -19,64 +19,56 @@ let db;
 let collection;
 
 async function connectDB() {
-    await client.connect();
-    db = client.db("fit2095");
-    collection = db.collection("sales");
-    console.log("Connect to DB successfully");
+    try {
+        await client.connect();
+        db = client.db("fit2095");
+        collection = db.collection("sales");
+        console.log("Connected to DB successfully");
+    } catch (err) {
+        console.error("Failed to connect to DB", err);
+    }
 }
 
 app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
-app.get("/33120102/sales", function (req, res) {
-    db.collection("sales")
-        .find({})
-        .toArray(function (err, data) {
-            //if data is not found, redirect to invalid page
-            if (data.length === 0) {
-                res.sendFile(path.join(__dirname, "views", "noSales.html"));
-            }else{
-                res.render("listsales", { sales: data });
-            }   
-        }
-    );
+app.get("/33120102/sales", async function (req, res) {
+    const data = await db.collection("sales").find({}).toArray();
+    if (data.length === 0) {
+        res.sendFile(path.join(__dirname, "views", "noSales.html"));
+    } else {
+        res.render("listsales", { sales: data });
+    }
 });
 
-app.get("/33120102/sales/unpaid", function (req, res) {
-    db.collection("sales")
-    //find a sale with isPaid false
-    .find({ isPaid: false })
-    .toArray(function (err, data) {
-            //if data is not found, redirect to invalid page
-            if (data.length === 0) {
-                res.sendFile(path.join(__dirname, "views", "noPaid.html"));
-                return;
-            }
-            res.render("listsales", { sales: data });
-        });
+app.get("/33120102/sales/unpaid", async function (req, res) {
+    const data = await db.collection("sales").find({ isPaid: false }).toArray();
+    if (data.length === 0) {
+        res.sendFile(path.join(__dirname, "views", "noPaid.html"));
+    } else {
+        res.render("listsales", { sales: data });
+    }
 });
 
 app.get("/33120102/sales/add", function (req, res) {
-    //send the add sale form also send the current number of sales in db
     res.sendFile(path.join(__dirname, "views", "add_sale.html"));
 });
 
-app.post("/33120102/sales/add", function (req, res) {
+app.post("/33120102/sales/add", async function (req, res) {
     let sale = {
         name: req.body.name,
         price: parseFloat(req.body.price),
         quantity: parseInt(req.body.quantity),
         isPaid: req.body.isPaid === "true",
     };
-    db.collection("sales").insertOne(sale);
+    await db.collection("sales").insertOne(sale);
     res.redirect("/33120102/sales");
 });
 
-app.get("/33120102/sales/remove", function (req, res) {
-    //delete entire sales document
-    db.collection("sales").deleteMany({});
+app.get("/33120102/sales/remove", async function (req, res) {
+    await db.collection("sales").deleteMany({});
     res.redirect("/33120102/sales");
 });
 
-connectDB();
+connectDB().then(() => console.log("Database connection established"));
