@@ -1,10 +1,17 @@
 <html>
-	<body>
-		<h1>Company Name</h1>
-        <p>Name: Linjun Cai</p>
-        <p>ID: 33120102</p>
-	</body>
+<body>
+    <header>
+        <img src="/logo.png" alt="Company Logo" />
+        <h1>Company Name</h1>
+    </header>
+    <p>Name: Linjun Cai</p>
+    <p>ID: 33120102</p>
+
     <a href="/33120102/sales">List all sales</a>
     <a href="/33120102/sales/unpaid">Get all unpaid sales</a>
     <a href="/33120102/sales/add">Add a sale</a>
+    <!--current number of paid and unpaid sales-->
+    <p>Number of paid sales: <%= paid %></p>
+    <p>Number of unpaid sales: <%= unpaid %></p>
+</body>
 </html>

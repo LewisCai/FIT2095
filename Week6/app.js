@@ -11,6 +11,8 @@ const app = express();
 app.listen(8080);
 app.use(express.urlencoded({ extended: false }));
 
+app.use(express.static(path.join(__dirname, "public")));
+
 // Configure Express for EJS
 app.engine("html", ejs.renderFile);
 app.set("view engine", "html");
@@ -29,9 +31,20 @@ async function connectDB() {
     }
 }
 
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "views", "index.html"));
-});
+//pass paid and unpaid sales to the index.html
+async function passSalesData(req, res) {
+    try {
+        const paidCount = await db.collection("sales").countDocuments({ isPaid: true });
+        const unpaidCount = await db.collection("sales").countDocuments({ isPaid: false });
+        res.render("index", { paid: paidCount, unpaid: unpaidCount });
+    } catch (err) {
+        console.error("Error fetching sales data", err);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+// Example usage in an Express route
+app.get("/", passSalesData);
 
 app.get("/33120102/sales", async function (req, res) {
     const data = await db.collection("sales").find({}).toArray();
