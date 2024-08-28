@@ -1,3 +1,35 @@
 <!-- lists all the sales’ attributes and their MongoDB IDs in a table. 
 If there are no sales, the HTML must show the message “No Sales Available"-->
 <!DOCTYPE html>
+
+<html>
+
+<body>
+    <h1>All Sales</h1>
+    <table id="sales">
+        <tr>
+            <th>Customer Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Payment Status</th>
+        </tr>
+        <% for(let i=0;i<sales.length;i++){ %>
+            <tr>
+                <td>
+                    <%= sales[i].name %>
+                </td>
+                <td>
+                    <%= sales[i].price %>
+                </td>
+                <td>
+                    <%= sales[i].quantity %>
+                </td>
+                <td>
+                    <%= sales[i].isPaid %>
+                </td>
+            </tr>
+            <%} %>
+    </table>
+</body>
+
+</html>
