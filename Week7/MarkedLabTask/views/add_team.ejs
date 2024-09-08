@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Team</title>
+</head>
+<body>
+    <h1>Add Team</h1>
+
+    <!-- Display the current team count -->
+    <p>Current Team Count in DB: <%= teamCount %></p>
+
+    <form action="/linjun/teams/add" method="POST">
+        <label for="name">Team Name</label>
+        <input type="text" name="name" required minlength="3">
+        
+        <label for="rank">Rank</label>
+        <input type="number" name="rank" required min="1" max="24">
+        
+        <button type="submit">Add Team</button>
+    </form>
+</body>
+</html>

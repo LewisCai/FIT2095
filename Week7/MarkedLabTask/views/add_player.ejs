@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Player</title>
+</head>
+<body>
+    <h1>Add Player</h1>
+
+    <!-- Display the current player count -->
+    <p>Current Player Count in DB: <%= playerCount %></p>
+
+    <form action="/linjun/players/add" method="POST">
+        <!-- Player Name -->
+        <label for="name">Player Name</label>
+        <input type="text" name="name" required minlength="5">
+
+        <!-- Player Age -->
+        <label for="age">Age</label>
+        <input type="number" name="age" required min="18" max="40"> <!-- Add validation for age between 18 and 40 -->
+
+        <!-- Player Salary -->
+        <label for="salary">Salary</label>
+        <input type="number" name="salary" required min="100" max="500">
+        
+        <button type="submit">Add Player</button>
+    </form>
+</body>
+</html>

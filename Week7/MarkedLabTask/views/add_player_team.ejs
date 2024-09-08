@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Player to Team</title>
+</head>
+<body>
+    <h1>Add Player to Team</h1>
+
+    <form action="/linjun/teams/add-player" method="POST">
+        <!-- Select Team by MongoDB Object ID -->
+        <label for="teamId">Select Team</label>
+        <select name="teamId" required>
+            <% teams.forEach(team => { %>
+                <option value="<%= team._id %>"><%= team.name %> (ID: <%= team._id %>)</option>
+            <% }) %>
+        </select>
+        
+        <!-- Select Player by MongoDB Object ID -->
+        <label for="playerId">Select Player</label>
+        <select name="playerId" required>
+            <% players.forEach(player => { %>
+                <option value="<%= player._id %>"><%= player.name %> (ID: <%= player._id %>)</option>
+            <% }) %>
+        </select>
+
+        <button type="submit">Add Player to Team</button>
+    </form>
+</body>
+</html>

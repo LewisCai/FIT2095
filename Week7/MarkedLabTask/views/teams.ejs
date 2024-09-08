@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teams</h1>
+
+    <% if (teams.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Rank</th>
+                    <th>Number of Players</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% teams.forEach(function(team) { %>
+                    <tr>
+                        <td><%= team.name %></td>
+                        <td><%= team.rank %></td>
+                        <td><%= team.players.length %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No Teams are Available.</p>
+    <% } %>
+
+</body>
+</html>
