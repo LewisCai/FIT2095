@@ -1,0 +1,29 @@
+<h2>1. String Interpolation (SI)</h2>
+<h3>Receive a value using SI</h3>
+<p>{{msg}}</p>
+
+<h3>Call a function using SI</h3>
+<p>{{getText()}}</p>
+
+<p>A random number between 0 to 200 is: {{randomNumberGenerator()}}</p>
+
+<h2>2. Property Binding</h2>
+
+No property binding: <input type="text" value="Default Text"><br>
+Property Binding: <input type="text" [value]="sampleText"><br>
+<br>
+No property binding: <input type="text" placeholder="Default Text"><br>
+Property Binding: <input type="text" [placeholder]="sampleText"><br>
+<br>
+<img src="favicon.ico" alt="image not found">
+<img [src]="iconURL" alt="image not found">
+<br>
+<img src="car.png" alt="image not found" width="30%">
+<img [src]="carImageURL" alt="image not found" width="30%">
+
+<h2>3. Event Binding</h2>
+<h3>increase counter</h3>
+<button (click)="increaseCounter()">Increase Counter</button>
+<p>Counter: {{counter}}</p>
+<h3>reset counter</h3>
+<button (click)="resetCounter()">Reset Counter</button>
